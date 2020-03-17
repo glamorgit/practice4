@@ -216,14 +216,16 @@
 <script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
 <script>
   var sysSwitch='off', sysState='off', i=0, n='', sum='', t1, t21, t22;
-  var str0='请输入作品序号（1~4），获得更多信息：';
-  var str1='<p>作品1：网页模仿，并实现常用效果，如CSS3动画、轮播图、视频播放等；链接如下：<br /><a href="https://glamorgit.github.io/practice1/imitate2345weather/" target="_blank">https://glamorgit.github.io/practice1/imitate2345weather/</a></p>';
-  var str2='<p>作品2：设计响应式网页，兼容主流浏览器，并适应手机；链接如下：<br /><a href="https://glamorgit.github.io/practice2/homecooking/" target="_blank">https://glamorgit.github.io/practice2/homecooking/</a></p>';
-  var str3='<p>作品3：名单成员的添加、删除和点击排序的demo；链接如下：<br /><a href="https://glamorgit.github.io/practice3/listclicksort/" target="_blank">https://glamorgit.github.io/practice3/listclicksort/</a></p>';
-  var str4='<p>作品4：名单成员的添加、删除和拖动排序的demo；链接如下：<br /><a href="https://glamorgit.github.io/practice3/listdragsort/" target="_blank">https://glamorgit.github.io/practice3/listdragsort/</a></p>';
+  var str0='请输入作品序号（1~5），获得更多信息：';
+  var str1='<p>作品1：网页模仿并实现常用效果（CSS3动画、轮播图、视频播放等）；链接如下：<br /><a href="https://glamorgit.github.io/practice1/imitate2345weather/" target="_blank">https://glamorgit.github.io/practice1/imitate2345weather/</a></p><br />';
+  var str2='<p>作品2：响应式网页，兼容主流浏览器，并适应手机；链接如下：<br /><a href="https://glamorgit.github.io/practice2/homecooking/" target="_blank">https://glamorgit.github.io/practice2/homecooking/</a></p><br />';
+  var str3='<p>作品3：名单成员的添加、删除和点击排序的demo；链接如下：<br /><a href="https://glamorgit.github.io/practice3/listclicksort/" target="_blank">https://glamorgit.github.io/practice3/listclicksort/</a></p><br />';
+  var str4='<p>作品4：名单成员的添加、删除和拖动排序的demo；链接如下：<br /><a href="https://glamorgit.github.io/practice3/listdragsort/" target="_blank">https://glamorgit.github.io/practice3/listdragsort/</a></p><br />';
+  var str5='<p>作品5：一个纸牌小游戏；链接如下：<br /><a href="https://glamorgit.github.io/practice5/poker8/" target="_blank">https://glamorgit.github.io/practice5/poker8/</a></p><br />';
   var strx='输入的序号不正确，请重新输入：';
   
   $(function() {
+	//开关
     $('#switch').click(function() {
       if (sysSwitch=='off') {
         $(this).animate({left: '-0.5rem'},500,sysStart);
@@ -232,7 +234,7 @@
         $(this).animate({left: '-2.25rem'},500,sysStop);
       }
     });
-    
+    //按钮
     $('.buttons').on('mousedown','div',function() {
       $(this).css('border-style','inset');
     });
@@ -242,7 +244,6 @@
     $('.buttons').on('mouseout','div',function() {
       $(this).css('border-style','outset');
     });
-    
     $('.buttons').on('click','div',function(event) {
       if (sysState=='on' && event.target.id!='backspace' && event.target.id!='enter') {
         var target=$(event.target);
@@ -255,12 +256,10 @@
         cursorOn();
       }
     });
-    
     $('#backspace').click(function() {
       $('#board span:last').remove();
       sum=sum.slice(0,-1);
     });
-    
     $('#enter').click(function() {
       clearTimeout(t21);
       clearTimeout(t22);
@@ -281,8 +280,12 @@
             $('#board').append(str3);
             typing(str0);
             break;
-          case '4':
+		  case '4':
             $('#board').append(str4);
+            typing(str0);
+            break;
+		  case '5':
+            $('#board').append(str5);
             typing(str0);
             break;
           default:
@@ -294,7 +297,7 @@
       }
     });
   })
-  
+  //启动
   function sysStart() {
     $('#light').css('background-color','#af0');
     $('.screen').css('background-color','#361');
@@ -302,7 +305,7 @@
     sysSwitch='on';
     typing(str0);
   }
-  
+  //关闭
   function sysStop() {
     $('#light').css('background-color','#ddd');
     $('.screen').css('background-color','#334');
@@ -318,7 +321,7 @@
     $('#board').empty();
     $('#board').css('top',0);
   }
-  
+  //显示提示
   function typing(str) {
     sysState='off';
     t1=setInterval(function() {
@@ -331,21 +334,20 @@
     },150);
     i=0;
   }
-  
+  //满屏上移
   function moveUp() {
     setTimeout(function() {
       var diff=$('.board').height()-$('#board').height();
       if (diff<0) $('#board').css('top',diff+"px");
     },200);
   }
-  
+  //光标闪烁
   function cursorOn() {
     t21=setTimeout(function() {
       $('#board').append('<i>_</i>');
       cursorOff();
     },250);
   }
-  
   function cursorOff() {
     t22=setTimeout(function() {
       $('#board i:last').remove();
@@ -357,7 +359,5 @@
 </body>
 
 </html>
-
-
 
 
